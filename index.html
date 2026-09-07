@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIRI BERGEMA - AI SMARTMOVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#050b14', 800: '#0a1526' },
+                        electric: '#007bff',
+                        cyan: '#00ffff',
+                        purple: { soft: '#b39ddb' },
+                        gold: '#ffa500'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Space Grotesk', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.8, filter: 'drop-shadow(0 0 15px rgba(0, 255, 255, 0.5))' },
+                            '50%': { opacity: 0.4, filter: 'drop-shadow(0 0 30px rgba(0, 255, 255, 0.8))' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #050b14 0%, #0a1526 50%, #004d61 100%);
+            background-attachment: fixed;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-panel {
+            background: rgba(5, 11, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 10px 40px 0 rgba(0, 255, 255, 0.05);
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+            perspective: 1000px;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 255, 255, 0.4); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 255, 0.8); }
+
+        .page-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
+        .page-section.active { display: block; opacity: 1; }
+
+        @media print {
+            body { background: white !important; color: black !important; }
+            .no-print, .grid-bg, #global-back-btn, header { display: none !important; }
+            #modal-raport { position: absolute; left: 0; top: 0; width: 100%; height: auto; background: white !important; color: black !important; padding: 0 !important; display: block !important; }
+            #modal-raport-card { border: 2px solid #000 !important; background: white !important; color: black !important; box-shadow: none !important; margin: 0; padding: 20px !important; }
+            .text-white, .text-gray-300, .text-gray-400 { color: #111827 !important; }
+            .bg-navy-900, .bg-black\/50, .bg-black\/40 { background: #f9fafb !important; border: 1px solid #e5e7eb !important; }
+            .text-cyan { color: #0284c7 !important; }
+            .text-gold { color: #d97706 !important; }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-100 min-h-screen flex flex-col">
+    <div class="grid-bg"></div>
+
+    <button id="global-back-btn" onclick="navigate('home')" class="glass px-5 py-2.5 rounded-full font-bold text-cyan flex items-center gap-2 hover:bg-cyan/10 transition-colors shadow-lg shadow-cyan/10 fixed top-4 left-4 z-50 hidden border border-cyan/30 backdrop-blur-md">
+        <i class="fas fa-arrow-left"></i> KEMBALI
+    </button>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 py-8 pt-20 md:pt-10 relative z-10">
+
+        <section id="page-home" class="page-section active pb-12">
+            <header class="flex flex-col md:flex-row justify-between items-center md:items-start w-full mb-12 relative z-10 gap-8">
+                <div class="w-full md:w-auto text-center md:text-left flex-1 mt-2">
+                    <div class="inline-block px-5 py-1.5 rounded-full border border-cyan/40 bg-cyan/10 text-cyan text-xs font-bold tracking-widest mb-4 shadow-[0_0_15px_rgba(0,255,255,0.2)]">
+                        <i class="fas fa-microchip mr-2"></i> AI POWERED PHYSICAL EDUCATION
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-tech font-bold leading-tight mb-4 drop-shadow-2xl">
+                        GEMA SMARTMOVE 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan via-blue-400 to-cyan bg-[length:200%_auto] animate-pulse">GIRI</span>
+                    </h1>
+                    <p class="text-gray-300 text-lg md:text-xl font-light italic tracking-wide max-w-3xl md:mx-0 mx-auto">
+                        "Berfikir • Bergerak • Berbudaya • Berkembang"
+                    </p>
+                </div>
+
+                <div class="flex-shrink-0 w-full md:w-auto flex flex-wrap sm:flex-nowrap justify-center md:justify-end gap-3">
+                    <button onclick="navigate('data-siswa')" class="glass px-4 py-3 rounded-2xl flex items-center gap-3 hover:bg-white/10 transition group border-cyan/30 shadow-lg flex-1 sm:flex-none justify-center">
+                        <div class="bg-cyan/20 p-2.5 rounded-xl text-cyan group-hover:bg-cyan transition shadow-[0_0_15px_rgba(0,255,255,0.3)] group-hover:text-navy-900">
+                            <i class="fas fa-user-astronaut text-lg"></i>
+                        </div>
+                        <div class="text-left pr-2">
+                            <div class="font-bold text-xs tracking-wider text-white">DATA SISWA</div>
+                            <div id="student-count-indicator" class="text-[11px] text-cyan font-tech">0 Pahlawan</div>
+                        </div>
+                    </button>
+
+                    <button onclick="navigate('rekap-belajar')" class="glass px-4 py-3 rounded-2xl flex items-center gap-3 hover:bg-white/10 transition group border-gold/40 shadow-lg flex-1 sm:flex-none justify-center">
+                        <div class="bg-gold/20 p-2.5 rounded-xl text-gold group-hover:bg-gold transition shadow-[0_0_15px_rgba(255,165,0,0.3)] group-hover:text-navy-900">
+                            <i class="fas fa-chart-bar text-lg"></i>
+                        </div>
+                        <div class="text-left pr-2">
+                            <div class="font-bold text-xs tracking-wider text-white">REKAP BELAJAR</div>
+                            <div class="text-[11px] text-gold font-tech">Raport & Analisis</div>
+                        </div>
+                    </button>
+                </div>
+            </header>
+
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 mb-16 relative">
+                <div class="w-full lg:w-1/2 flex justify-center items-center relative group min-h-[350px] sm:min-h-[450px] lg:min-h-[550px]">
+                    <div class="absolute inset-0 bg-cyan/20 blur-[80px] rounded-full animate-pulse-glow z-0 pointer-events-none"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-cyan/10 rounded-full animate-spin-slow z-0 pointer-events-none border-t-cyan/40"></div>
+                    
+                    <div class="glass-panel rounded-[2rem] w-full h-[400px] md:h-[450px] lg:h-[550px] relative z-10 overflow-hidden shadow-[0_0_50px_rgba(0,255,255,0.15)] flex flex-col transition-transform duration-500 border-2 border-cyan/30 animate-float">
+                        <div class="bg-navy-800/90 p-3.5 text-center text-sm text-cyan font-tech border-b border-cyan/30 backdrop-blur-md relative z-20 flex justify-between items-center px-6">
+                            <span class="font-bold tracking-wider"><i class="fas fa-cube mr-2 text-lg"></i> MASKOT GIRI 3D</span>
+                            <button onclick="reloadMascot()" class="px-4 py-1.5 bg-cyan/10 hover:bg-cyan/30 border border-cyan/30 rounded-full text-xs font-bold transition flex items-center gap-2"><i class="fas fa-sync-alt"></i> Muat Ulang</button>
+                        </div>
+                        <div id="assemblr-container" class="flex-grow w-full h-full bg-navy-900 flex items-center justify-center relative overflow-hidden">
+                            <iframe id="assemblr-iframe" src="https://viewer-edu.assemblrworld.com/Embed/-55RgwrnqpAqllSCAGzi" class="w-full h-full border-0" allow="camera; microphone; gyroscope; accelerometer; magnetometer; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 z-10 text-center lg:text-left flex flex-col justify-center">
+                    <div class="flex flex-col gap-4 max-w-md mx-auto lg:mx-0 w-full">
+                        <button onclick="navigate('video-pembelajaran')" class="glass hover:bg-cyan/10 border border-white/10 hover:border-cyan/40 p-5 rounded-2xl flex items-center gap-5 transition-all duration-300 group w-full text-left">
+                            <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-cyan rounded-xl flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-play text-white"></i></div>
+                            <div>
+                                <h3 class="font-bold font-tech text-white group-hover:text-cyan transition text-lg tracking-wide">VIDEO PEMBELAJARAN</h3>
+                                <p class="text-xs text-gray-400">Pelajari Gerak Dasar Manipulatif</p>
+                            </div>
+                        </button>
+
+                        <button onclick="navigate('video-tantangan')" class="glass hover:bg-purple-500/10 border border-white/10 hover:border-purple-500/40 p-5 rounded-2xl flex items-center gap-5 transition-all duration-300 group w-full text-left">
+                            <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-robot text-white"></i></div>
+                            <div>
+                                <h3 class="font-bold font-tech text-white group-hover:text-purple-400 transition text-lg tracking-wide">TANTANGAN BERSAMA GIRI</h3>
+                                <p class="text-xs text-gray-400">Tonton Ajakan Misi dari Giri</p>
+                            </div>
+                        </button>
+
+                        <button onclick="handleStartMission()" class="bg-gradient-to-r from-gold to-yellow-500 hover:from-yellow-400 hover:to-gold p-5 rounded-2xl flex items-center gap-5 transition-all duration-300 group w-full text-left shadow-[0_0_20px_rgba(255,165,0,0.3)] hover:shadow-[0_0_35px_rgba(255,165,0,0.5)] border border-yellow-300/50 relative overflow-hidden mt-2">
+                            <div class="w-14 h-14 bg-navy-900 rounded-xl flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform text-gold"><i class="fas fa-rocket"></i></div>
+                            <div class="relative z-10">
+                                <h3 class="font-bold font-tech text-navy-900 text-xl tracking-wide mb-1">MULAI SMARTMOVE MISSION</h3>
+                                <p class="text-xs text-navy-800 font-bold">Ayo Kerjakan Misinya dengan SEMANGAT</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-video-pembelajaran" class="page-section pb-12">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan/40 bg-cyan/10 text-cyan text-xs font-bold tracking-widest mb-4">
+                    <i class="fas fa-play-circle"></i> VIDEO PEMBELAJARAN
+                </div>
+                <h2 class="text-4xl font-tech font-bold text-cyan mb-3">GERAK DASAR MANIPULATIF</h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">Simak video pembelajaran berikut sebelum mengerjakan misi SmartMove.</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-4 md:p-6 max-w-5xl mx-auto border-cyan/30">
+                <div class="relative w-full aspect-video overflow-hidden rounded-2xl bg-black border border-cyan/30">
+                    <iframe
+                        src="https://www.youtube.com/embed/9Z-CXtFediQ"
+                        title="Video Pembelajaran Gerak Dasar Manipulatif"
+                        class="absolute inset-0 w-full h-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <p class="text-xs text-gray-400 mt-4 text-center">Video pembelajaran SmartMove Giri</p>
+            </div>
+        </section>
+
+        <section id="page-video-tantangan" class="page-section pb-12">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-400/40 bg-purple-500/10 text-purple-300 text-xs font-bold tracking-widest mb-4">
+                    <i class="fas fa-robot"></i> TANTANGAN BERSAMA GIRI
+                </div>
+                <h2 class="text-4xl font-tech font-bold text-purple-300 mb-3">SIAP MENGIKUTI TANTANGAN?</h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">Tonton ajakan misi dari Giri, lalu buktikan kemampuanmu dalam SmartMove Mission.</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-4 md:p-6 max-w-5xl mx-auto border-purple-500/40">
+                <div class="relative w-full aspect-video overflow-hidden rounded-2xl bg-black border border-purple-400/30">
+                    <iframe
+                        src="https://www.youtube.com/embed/hGE0FWIynTM"
+                        title="Video Tantangan Bersama Giri"
+                        class="absolute inset-0 w-full h-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <p class="text-xs text-gray-400 mt-4 text-center">Video tantangan SmartMove Giri</p>
+            </div>
+        </section>
+
+        <section id="page-data-siswa" class="page-section pb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-tech font-bold text-cyan mb-3">DATA SMARTMOVE HERO</h2>
+                <p class="text-gray-400 text-lg">Input nama dan kelas siswa untuk memulai petualangan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-3xl h-fit border border-white/10">
+                    <h3 class="text-xl font-bold mb-6 font-tech flex items-center"><i class="fas fa-user-plus text-cyan mr-3 text-2xl"></i> Tambah Siswa Baru</h3>
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Nama Lengkap Siswa</label>
+                            <input type="text" id="input-nama" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-cyan" placeholder="Masukkan nama siswa...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Kelas</label>
+                            <input type="text" id="input-kelas" class="w-full bg-black/50 border border-white/20 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-cyan" placeholder="Contoh: 2A">
+                        </div>
+                        <button onclick="addStudent()" class="w-full py-4 bg-cyan text-navy-900 font-bold rounded-xl hover:bg-cyan/80 transition flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,255,255,0.3)] text-lg mt-2">
+                            <i class="fas fa-save"></i> SIMPAN SISWA
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 glass p-8 rounded-3xl border border-white/10">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold font-tech flex items-center"><i class="fas fa-users text-cyan mr-3 text-2xl"></i> Daftar Peserta Terdaftar</h3>
+                        <span id="student-count-badge" class="text-sm font-bold bg-cyan/20 text-cyan px-4 py-1.5 rounded-full border border-cyan/30">0 Siswa</span>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b-2 border-white/10 text-xs text-gray-400 uppercase tracking-wider">
+                                    <th class="py-4 px-3 font-bold">No</th>
+                                    <th class="py-4 px-3 font-bold">Nama Siswa</th>
+                                    <th class="py-4 px-3 font-bold">Kelas</th>
+                                    <th class="py-4 px-3 font-bold text-center">Status Misi</th>
+                                    <th class="py-4 px-3 text-center font-bold">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-table-body" class="text-sm divide-y divide-white/5"></tbody>
+                        </table>
+                        <div id="empty-state-student" class="text-center py-12 text-gray-500">
+                            <i class="fas fa-user-astronaut text-4xl opacity-50 mb-3"></i>
+                            <p class="text-base">Belum ada data siswa.<br/>Isi form di samping untuk mendaftarkan siswa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-rekap-belajar" class="page-section pb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-tech font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-200 to-gold mb-3">REKAP HASIL BELAJAR & PEMETAAN KEMAMPUAN SISWA</h2>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">Ringkasan capaian pembelajaran berbasis evaluasi fisik nyata.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <div class="glass-panel p-6 rounded-3xl border-cyan/30 flex items-center gap-5">
+                    <div class="w-14 h-14 bg-cyan/20 rounded-2xl flex items-center justify-center text-3xl text-cyan border border-cyan/40"><i class="fas fa-users"></i></div>
+                    <div>
+                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">Total Siswa</div>
+                        <div class="text-3xl font-tech font-bold text-white" id="rekap-stat-total">0</div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border-gold/30 flex items-center gap-5">
+                    <div class="w-14 h-14 bg-gold/20 rounded-2xl flex items-center justify-center text-3xl text-gold border border-gold/40"><i class="fas fa-star"></i></div>
+                    <div>
+                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">Rata-rata XP</div>
+                        <div class="text-3xl font-tech font-bold text-gold" id="rekap-stat-avg-xp">0 XP</div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border-blue-500/30 flex items-center gap-5">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center text-3xl text-blue-400 border border-blue-500/40"><i class="fas fa-bullseye"></i></div>
+                    <div>
+                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">Tuntas Misi</div>
+                        <div class="text-3xl font-tech font-bold text-blue-400" id="rekap-stat-misi1">0%</div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border-purple-500/30 flex items-center gap-5">
+                    <div class="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center text-3xl text-purple-400 border border-purple-500/40"><i class="fas fa-trophy"></i></div>
+                    <div>
+                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">SmartMove Hero</div>
+                        <div class="text-3xl font-tech font-bold text-purple-400" id="rekap-stat-hero">0 Siswa</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-3xl border border-gold/30 mb-10">
+                <h3 class="text-xl font-bold font-tech text-gold flex items-center mb-6">
+                    <i class="fas fa-map-marked-alt text-gold mr-3 text-2xl"></i> Pemetaan Kemampuan Keterampilan Siswa (4 Aspek PJOK)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b-2 border-white/10 text-xs text-gray-400 uppercase">
+                                <th class="py-4 px-3 font-bold">Nama Siswa</th>
+                                <th class="py-4 px-3 font-bold">1. Keterampilan Gerak</th>
+                                <th class="py-4 px-3 font-bold">2. Pengetahuan Gerak</th>
+                                <th class="py-4 px-3 font-bold">3. Pemanfaatan Gerak</th>
+                                <th class="py-4 px-3 font-bold">4. Karakter & Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competency-mapping-body" class="text-xs divide-y divide-white/5"></tbody>
+                    </table>
+                    <div id="empty-competency-state" class="text-center py-10 text-gray-500">Belum ada data pemetaan kemampuan.</div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-3xl border border-white/10 mb-10">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <h3 class="text-xl font-bold font-tech text-white flex items-center">
+                        <i class="fas fa-list-check text-gold mr-3 text-2xl"></i> Rekapitulasi Nilai & Evaluasi Realistis
+                    </h3>
+                    <div class="flex flex-wrap gap-3 w-full sm:w-auto">
+                        <input type="text" id="search-rekap" onkeyup="renderRekapBelajar()" placeholder="Cari nama / kelas..." class="bg-black/50 border border-white/20 rounded-xl px-4 py-2 text-sm text-white focus:outline-none">
+                        <button onclick="exportStudentsDataCSV()" class="px-5 py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold text-xs"><i class="fas fa-file-excel mr-1"></i> Unduh CSV</button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b-2 border-white/10 text-xs text-gray-400 uppercase">
+                                <th class="py-4 px-3 font-bold">No</th>
+                                <th class="py-4 px-3 font-bold">Nama Siswa</th>
+                                <th class="py-4 px-3 font-bold">Kelas</th>
+                                <th class="py-4 px-3 font-bold text-center">Hasil Lempar</th>
+                                <th class="py-4 px-3 font-bold text-center">Hasil Tendang</th>
+                                <th class="py-4 px-3 font-bold text-center">Kecakapan</th>
+                                <th class="py-4 px-3 font-bold">Saran AI</th>
+                                <th class="py-4 px-3 font-bold text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rekap-table-body" class="text-xs divide-y divide-white/5"></tbody>
+                    </table>
+                    <div id="empty-rekap-state" class="text-center py-12 text-gray-500">Belum ada data nilai pembelajaran.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-mission-play" class="page-section pb-12">
+            <div class="glass-panel p-4 md:p-5 rounded-3xl mb-8 border-gold/40 flex flex-col md:flex-row justify-between items-center gap-4 bg-navy-900/90 shadow-lg">
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <div class="w-10 h-10 bg-gold/20 rounded-xl flex items-center justify-center text-gold border border-gold/40"><i class="fas fa-user-ninja"></i></div>
+                    <div>
+                        <label class="block text-[10px] text-gray-400 uppercase font-bold tracking-widest">Siswa Aktif:</label>
+                        <select id="mission-header-student-select" onchange="switchStudentInMission(this.value)" class="bg-black/70 border border-gold/40 text-gold font-bold rounded-xl px-3 py-1.5 text-sm focus:outline-none w-56 cursor-pointer"></select>
+                    </div>
+                </div>
+                <span class="text-xs text-cyan font-bold font-tech px-3 py-1 bg-cyan/10 rounded-full border border-cyan/30"><i class="fas fa-layer-group mr-1"></i> PENILAIAN REALISTIS TERPADU</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="glass-panel p-6 rounded-3xl border-cyan/30 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-cyan uppercase"><i class="fas fa-lantern mr-1"></i> MISI 1: DAMAR KURUNG (LEMPAR)</span>
+                            <span class="text-[11px] font-tech text-cyan font-bold" id="m1-card-count">0 Card</span>
+                        </div>
+                        <h3 class="text-xl font-tech font-bold text-white mb-2">Algoritma Melempar Bola</h3>
+                        <p class="text-xs text-gray-400 mb-4">Susun kartu secara runut (Persiapan $\rightarrow$ Eksekusi $\rightarrow$ Lanjutan):</p>
+
+                        <div class="bg-black/40 p-3 rounded-2xl border border-white/10 mb-4">
+                            <div class="text-[11px] text-gray-400 font-bold mb-2">Koleksi Kartu Lemparan (Klik):</div>
+                            <div class="flex flex-wrap gap-2" id="m1-bank-container"></div>
+                        </div>
+
+                        <div class="flex flex-col gap-2 mb-4" id="m1-slot-container"></div>
+                    </div>
+
+                    <div class="bg-navy-900/80 p-3.5 rounded-2xl border border-white/10 mt-2">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-gold uppercase"><i class="fas fa-running mr-1"></i> Uji Coba Latihan Lempar (5x Realita)</span>
+                            <span class="text-xs font-tech text-cyan font-bold"><span id="m1-tries-done">0</span>/5</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mb-2">
+                            <button onclick="recordAttempt(1, true)" class="py-2 bg-green-600/30 hover:bg-green-600/50 border border-green-500 text-green-300 font-bold rounded-xl text-xs">🎯 Berhasil</button>
+                            <button onclick="recordAttempt(1, false)" class="py-2 bg-red-600/30 hover:bg-red-600/50 border border-red-500 text-red-300 font-bold rounded-xl text-xs">❌ Melenceng</button>
+                        </div>
+                        <div id="m1-history-badges" class="flex gap-1 flex-wrap text-[10px] text-gray-500 italic">Belum ada latihan.</div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-3xl border-orange-400/30 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-orange-400 uppercase"><i class="fas fa-paw mr-1"></i> MISI 2: PENCAK MACAN (TENDANG)</span>
+                            <span class="text-[11px] font-tech text-orange-400 font-bold" id="m2-card-count">0 Card</span>
+                        </div>
+                        <h3 class="text-xl font-tech font-bold text-white mb-2">Algoritma Menendang Bola</h3>
+                        <p class="text-xs text-gray-400 mb-4">Susun kartu secara runut (Persiapan $\rightarrow$ Eksekusi $\rightarrow$ Lanjutan):</p>
+
+                        <div class="bg-black/40 p-3 rounded-2xl border border-white/10 mb-4">
+                            <div class="text-[11px] text-gray-400 font-bold mb-2">Koleksi Kartu Tendangan (Klik):</div>
+                            <div class="flex flex-wrap gap-2" id="m2-bank-container"></div>
+                        </div>
+
+                        <div class="flex flex-col gap-2 mb-4" id="m2-slot-container"></div>
+                    </div>
+
+                    <div class="bg-navy-900/80 p-3.5 rounded-2xl border border-white/10 mt-2">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-gold uppercase"><i class="fas fa-running mr-1"></i> Uji Coba Latihan Tendang (5x Realita)</span>
+                            <span class="text-xs font-tech text-cyan font-bold"><span id="m2-tries-done">0</span>/5</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mb-2">
+                            <button onclick="recordAttempt(2, true)" class="py-2 bg-green-600/30 hover:bg-green-600/50 border border-green-500 text-green-300 font-bold rounded-xl text-xs">🎯 Berhasil</button>
+                            <button onclick="recordAttempt(2, false)" class="py-2 bg-red-600/30 hover:bg-red-600/50 border border-red-500 text-red-300 font-bold rounded-xl text-xs">❌ Melenceng</button>
+                        </div>
+                        <div id="m2-history-badges" class="flex gap-1 flex-wrap text-[10px] text-gray-500 italic">Belum ada latihan.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-3xl border-purple-500/40 text-center shadow-xl">
+                <button id="btn-open-camera" onclick="startCameraScan()" class="w-full max-w-xl mx-auto py-4 bg-gradient-to-r from-cyan via-purple-500 to-cyan text-navy-900 font-bold rounded-2xl transition-all shadow-[0_0_25px_rgba(0,255,255,0.4)] hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] text-base flex justify-center items-center gap-3 border border-cyan/50">
+                    <i class="fas fa-video text-xl"></i> <span>MULAI REKAM KAMERA AI (EVALUASI REALISTIS)</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-camera" class="fixed inset-0 z-[70] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 hidden">
+        <div class="glass-panel border-2 border-cyan/50 rounded-3xl p-6 max-w-2xl w-full text-center relative shadow-[0_0_60px_rgba(0,255,255,0.3)]">
+            <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-4">
+                <div class="flex items-center gap-2">
+                    <span id="recording-dot" class="w-3 h-3 rounded-full bg-gray-500"></span>
+                    <h3 class="font-tech font-bold text-cyan text-lg">REKAM GERAKAN REALISTIS</h3>
+                </div>
+                <button onclick="stopCameraScan()" class="text-gray-400 hover:text-white px-3 py-1 rounded-lg bg-white/10 text-xs font-bold">Batal</button>
+            </div>
+
+            <div class="relative w-full aspect-video bg-black rounded-2xl overflow-hidden border border-cyan/30 flex items-center justify-center mb-4">
+                <video id="webcam-video" autoplay playsinline muted class="w-full h-full object-cover transform -scale-x-100"></video>
+                <div id="camera-fallback" class="absolute inset-0 flex flex-col items-center justify-center bg-navy-900/90 text-center p-6 hidden">
+                    <i class="fas fa-video-slash text-4xl text-cyan/50 mb-3"></i>
+                    <p id="camera-status-title" class="text-sm font-bold text-white mb-1">Kamera Tidak Aktif / Perangkat Tidak Ditemukan</p>
+                    <p id="camera-status-message" class="text-xs text-gray-400">Mode simulasi tersedia. Pastikan izin kamera telah diberikan.</p>
+                    <button onclick="requestCameraAccess()" class="mt-4 px-4 py-2 bg-cyan text-navy-900 rounded-xl text-xs font-bold hover:bg-cyan/80">Coba Aktifkan Kamera</button>
+                </div>
+                <div id="recording-timer" class="absolute top-4 left-4 bg-black/80 px-3.5 py-1.5 rounded-full border border-red-500/80 text-xs font-tech font-bold text-red-400 hidden flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                    <span>REC <span id="timer-sec">00:00</span></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <button id="btn-start-rec" onclick="startRecordingVideo()" class="py-3.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-2xl text-sm flex justify-center items-center gap-2">
+                    <i class="fas fa-circle"></i> MULAI REKAM
+                </button>
+                <button id="btn-stop-rec" onclick="stopRecordingAndAnalyze()" disabled class="py-3.5 bg-cyan hover:bg-cyan/80 text-navy-900 font-bold rounded-2xl text-sm flex justify-center items-center gap-2 disabled:opacity-40">
+                    <i class="fas fa-stop"></i> BERHENTI & HITUNG SKOR REALISTIS
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mission-result" class="fixed inset-0 z-[80] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="glass-panel border-2 border-cyan/50 rounded-3xl p-6 max-w-xl w-full text-center relative max-h-[92vh] overflow-y-auto">
+            <h2 class="text-2xl font-tech font-bold text-white mb-1">HASIL EVALUASI FISIK & KODING REALISTIS</h2>
+            <p class="text-gray-400 text-xs mb-4">Penilaian berdasarkan kesesuaian koding, durasi, dan performa latihan fisik 5x</p>
+
+            <div id="video-preview-container" class="mb-5 bg-black/60 p-3 rounded-2xl border border-white/10 hidden">
+                <video id="recorded-video-player" controls class="w-full aspect-video rounded-xl bg-black border border-cyan/30 mb-2"></video>
+            </div>
+            
+            <div class="bg-black/50 p-3 rounded-2xl border border-white/10 mb-4 grid grid-cols-2 gap-2">
+                <div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-0.5">Skor Akhir Nyata</div>
+                    <div class="text-3xl font-tech font-bold text-green-400" id="result-score">0%</div>
+                </div>
+                <div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-0.5">XP Diperoleh</div>
+                    <div class="text-3xl font-tech font-bold text-gold" id="result-xp">+0</div>
+                </div>
+            </div>
+
+            <div class="bg-navy-800/90 p-4 rounded-2xl border border-cyan/30 text-left text-xs mb-4 space-y-2">
+                <div class="text-cyan font-bold mb-2 border-b border-white/10 pb-1.5 flex justify-between items-center">
+                    <span><i class="fas fa-clipboard-check mr-1.5"></i> Evaluasi 4 Indikator PJOK Realistis:</span>
+                    <button onclick="speakAIFeedback()" class="text-gold font-bold text-[11px]"><i class="fas fa-volume-up"></i> Suara</button>
+                </div>
+                <div class="grid grid-cols-1 gap-1.5" id="aspects-breakdown-list"></div>
+            </div>
+
+            <div class="bg-purple-900/40 p-4 rounded-2xl border border-purple-400/40 text-left text-xs mb-5">
+                <div class="text-purple-300 font-bold mb-1.5"><i class="fas fa-home text-purple-400"></i> Rekomendasi Tugas Latihan Rumah:</div>
+                <p id="result-ai-home-task" class="text-gray-200 bg-black/40 p-3 rounded-xl border border-purple-400/20 font-sans"></p>
+            </div>
+
+            <div class="space-y-2.5">
+                <button onclick="finishMissionAndNext()" class="w-full py-3.5 bg-cyan text-navy-900 rounded-xl font-bold hover:bg-cyan/80 transition text-sm">
+                    <i class="fas fa-save mr-1"></i> SIMPAN HASIL EVALUASI KE RAPORT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-raport" class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-lg flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div id="modal-raport-card" class="bg-navy-900 border-2 border-gold/50 text-white rounded-3xl p-6 sm:p-10 max-w-3xl w-full relative my-8">
+            <button onclick="closeRaportModal()" class="no-print absolute top-5 right-5 w-10 h-10 bg-white/10 rounded-full text-gray-300"><i class="fas fa-times"></i></button>
+
+            <div class="text-center border-b border-white/10 pb-6 mb-6">
+                <h2 class="text-2xl font-tech font-bold text-gold tracking-wider">RAPORT DIGITAL GIRI SMARTMOVE</h2>
+                <p class="text-xs text-cyan tracking-widest font-bold uppercase">Hasil Evaluasi PJOK Realistis & Pemetaan Kemampuan</p>
+            </div>
+
+            <div id="raport-student-info" class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-black/40 p-4 rounded-2xl border border-white/10 mb-6 text-sm"></div>
+
+            <div class="space-y-6 mb-6">
+                <div>
+                    <h4 class="text-xs font-bold text-gray-400 uppercase mb-3"><i class="fas fa-tasks text-cyan mr-2"></i> Status Misi Terpadu</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="raport-missions-status"></div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-gold uppercase mb-3"><i class="fas fa-graduation-cap text-gold mr-2"></i> Pemetaan 4 Kecakapan PJOK</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="raport-curriculum-competencies"></div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-purple-300 uppercase mb-3"><i class="fas fa-house-user text-purple-400 mr-2"></i> Tugas Latihan Mandiri di Rumah</h4>
+                    <div class="bg-black/30 p-4 rounded-xl border border-purple-400/30 text-sm text-gray-200" id="raport-home-task-text"></div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-8 pt-6 border-t border-white/10 no-print">
+                <button onclick="downloadRaportPDF()" class="px-6 py-2.5 bg-green-500 text-navy-900 rounded-xl font-bold text-sm"><i class="fas fa-download mr-1"></i> CETAK / UNDUH PDF</button>
+                <button onclick="closeRaportModal()" class="px-6 py-2.5 bg-white/10 text-white rounded-xl font-bold text-sm">Tutup Raport</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let students = []; 
+        let activeStudentId = null;
+        let m1SelectedCards = []; 
+        let m2SelectedCards = []; 
+        let m1PracticeAttempts = [];
+        let m2PracticeAttempts = [];
+        
+        let cameraStream = null;
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let recordedVideoBlob = null;
+        let recordingTimerInterval;
+        let recSeconds = 0;
+        let currentAIFeedbackSpeech = "";
+        let isSimulationRecording = false;
+        let currentHomeTaskText = "";
+
+        // URUTAN LOGIS KARTU KODING (1-5)
+        const missionCardBank = {
+            1: [
+                { id: 'c1', text: '👀 Pandangan Lurus ke Target', icon: 'fa-eye', seq: 1 },
+                { id: 'c2', text: '📐 Buka Kaki Sejajar Bahu', icon: 'fa-ruler-horizontal', seq: 2 },
+                { id: 'c3', text: '💪 Tarik Bola di Atas Kepala', icon: 'fa-hand-rock', seq: 3 },
+                { id: 'c4', text: '🚀 Dorong & Lepaskan Bola', icon: 'fa-paper-plane', seq: 4 },
+                { id: 'c5', text: '🎯 Follow Through / Jari Ikuti Arah', icon: 'fa-bullseye', seq: 5 }
+            ],
+            2: [
+                { id: 'c1', text: '👁️ Kunci Mata pada Target Bola', icon: 'fa-crosshairs', seq: 1 },
+                { id: 'c2', text: '🦶 Kaki Tumpu di Samping Bola', icon: 'fa-shoe-prints', seq: 2 },
+                { id: 'c3', text: '🦵 Tarik Kaki Tendang ke Belakang', icon: 'fa-running', seq: 3 },
+                { id: 'c4', text: '⚽ Ayunkan Kaki Kenai Tengah Bola', icon: 'fa-futbol', seq: 4 },
+                { id: 'c5', text: '⚖️ Follow Through & Keseimbangan', icon: 'fa-child', seq: 5 }
+            ]
+        };
+
+        function reloadMascot() {
+            const iframe = document.getElementById('assemblr-iframe');
+            if (iframe) {
+                iframe.src = iframe.src;
+            }
+        }
+
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStudents();
+            renderRekapBelajar();
+        });
+
+        function navigate(pageId) {
+            document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
+            const target = document.getElementById(`page-${pageId}`);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            const backBtn = document.getElementById('global-back-btn');
+            if (pageId === 'home') backBtn.classList.add('hidden');
+            else backBtn.classList.remove('hidden');
+        }
+
+        function addStudent() {
+            const nama = document.getElementById('input-nama').value.trim();
+            const kelas = document.getElementById('input-kelas').value.trim();
+            if (!nama || !kelas) {
+                alert('Nama dan Kelas siswa harus diisi!');
+                return;
+            }
+            
+            students.push({
+                id: Date.now(),
+                nama, kelas, xp: 0,
+                m1Completed: false, m1Score: 0,
+                m2Completed: false, m2Score: 0,
+                aiAkurasi: 0, aiKecepatan: 0, aiKoordinasi: 0,
+                homeTask: '', aiFeedback: ''
+            });
+
+            document.getElementById('input-nama').value = '';
+            document.getElementById('input-kelas').value = '';
+            renderStudents();
+            renderRekapBelajar();
+        }
+
+        function renderStudents() {
+            const tbody = document.getElementById('student-table-body');
+            const emptyState = document.getElementById('empty-state-student');
+            tbody.innerHTML = '';
+            
+            document.getElementById('student-count-badge').textContent = `${students.length} Siswa`;
+            document.getElementById('student-count-indicator').textContent = `${students.length} Pahlawan`;
+
+            if (students.length === 0) {
+                emptyState.classList.remove('hidden');
+                tbody.parentElement.classList.add('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            tbody.parentElement.classList.remove('hidden');
+
+            students.forEach((s, idx) => {
+                const isFullyDone = s.m1Completed && s.m2Completed;
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-white/5 hover:bg-white/5';
+                tr.innerHTML = `
+                    <td class="py-3 px-3">${idx + 1}</td>
+                    <td class="py-3 px-3 font-bold text-white">${s.nama}</td>
+                    <td class="py-3 px-3">${s.kelas}</td>
+                    <td class="py-3 px-3 text-center">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold ${isFullyDone ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}">
+                            ${isFullyDone ? 'Selesai' : 'Belum Selesai'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-3 text-center">
+                        <button onclick="handleStartMission(${s.id})" class="px-3 py-1 bg-cyan text-navy-900 rounded-lg text-xs font-bold">Mulai Misi</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function handleStartMission(studentId = null) {
+            if (studentId) activeStudentId = studentId;
+            else if (!activeStudentId) {
+                if (students.length === 0) {
+                    alert('Silakan daftarkan siswa terlebih dahulu!');
+                    navigate('data-siswa');
+                    return;
+                }
+                activeStudentId = students[0].id;
+            }
+            setupMissionPlay();
+            navigate('mission-play');
+        }
+
+        function switchStudentInMission(studentId) {
+            activeStudentId = parseInt(studentId);
+            setupMissionPlay();
+        }
+
+        function setupMissionPlay() {
+            const selectElem = document.getElementById('mission-header-student-select');
+            selectElem.innerHTML = '';
+            students.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.textContent = `${s.nama} (${s.kelas})`;
+                if(s.id === activeStudentId) opt.selected = true;
+                selectElem.appendChild(opt);
+            });
+
+            m1SelectedCards = [];
+            m2SelectedCards = [];
+            m1PracticeAttempts = [];
+            m2PracticeAttempts = [];
+
+            renderBankCards(1); renderBankCards(2);
+            renderSlots(1); renderSlots(2);
+            updatePracticeDisplay(1); updatePracticeDisplay(2);
+        }
+
+        function renderBankCards(missionNum) {
+            const container = document.getElementById(missionNum === 1 ? 'm1-bank-container' : 'm2-bank-container');
+            container.innerHTML = '';
+            const selectedArr = missionNum === 1 ? m1SelectedCards : m2SelectedCards;
+
+            missionCardBank[missionNum].forEach((card) => {
+                const isSelected = selectedArr.some(c => c.id === card.id);
+                const item = document.createElement('button');
+                item.className = `px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border ${isSelected ? 'bg-black/20 text-gray-500 border-white/5 opacity-40' : 'bg-navy-800 text-white border-cyan/40 hover:border-cyan'}`;
+                item.onclick = () => { if(!isSelected) addCardToSlot(missionNum, card); };
+                item.innerHTML = `<i class="fas ${card.icon} text-cyan"></i> ${card.text}`;
+                container.appendChild(item);
+            });
+        }
+
+        function addCardToSlot(missionNum, cardObj) {
+            if (missionNum === 1) m1SelectedCards.push(cardObj);
+            else m2SelectedCards.push(cardObj);
+            renderSlots(missionNum);
+            renderBankCards(missionNum);
+        }
+
+        function removeCardFromSlot(missionNum, index) {
+            if (missionNum === 1) m1SelectedCards.splice(index, 1);
+            else m2SelectedCards.splice(index, 1);
+            renderSlots(missionNum);
+            renderBankCards(missionNum);
+        }
+
+        function renderSlots(missionNum) {
+            const container = document.getElementById(missionNum === 1 ? 'm1-slot-container' : 'm2-slot-container');
+            const countTag = document.getElementById(missionNum === 1 ? 'm1-card-count' : 'm2-card-count');
+            const selectedArr = missionNum === 1 ? m1SelectedCards : m2SelectedCards;
+
+            container.innerHTML = '';
+            countTag.textContent = `${selectedArr.length} Card`;
+
+            if (selectedArr.length === 0) {
+                container.innerHTML = `<div class="p-3 text-[11px] text-gray-500 bg-black/20 rounded-xl border border-dashed border-gray-700 text-center">Belum ada kartu terpasang.</div>`;
+                return;
+            }
+
+            selectedArr.forEach((card, idx) => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between px-3 py-1.5 text-xs font-bold text-white bg-navy-800 rounded-xl border border-cyan/40";
+                div.innerHTML = `
+                    <span><span class="text-cyan font-tech text-[10px]">${idx + 1}.</span> ${card.text}</span>
+                    <button onclick="removeCardFromSlot(${missionNum}, ${idx})" class="text-red-400 text-xs px-1"><i class="fas fa-times"></i></button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function recordAttempt(missionNum, isSuccess) {
+            const attemptsArr = missionNum === 1 ? m1PracticeAttempts : m2PracticeAttempts;
+            if (attemptsArr.length >= 5) {
+                alert(`Siswa sudah melakukan 5x uji coba latihan fisik Misi ${missionNum}!`);
+                return;
+            }
+            attemptsArr.push(isSuccess);
+            updatePracticeDisplay(missionNum);
+        }
+
+        function updatePracticeDisplay(missionNum) {
+            const attemptsArr = missionNum === 1 ? m1PracticeAttempts : m2PracticeAttempts;
+            document.getElementById(missionNum === 1 ? 'm1-tries-done' : 'm2-tries-done').textContent = attemptsArr.length;
+            const badgeContainer = document.getElementById(missionNum === 1 ? 'm1-history-badges' : 'm2-history-badges');
+
+            if (attemptsArr.length === 0) {
+                badgeContainer.innerHTML = `<span class="text-gray-500 italic text-[10px]">Belum ada latihan.</span>`;
+                return;
+            }
+
+            badgeContainer.innerHTML = '';
+            attemptsArr.forEach((res, idx) => {
+                const badge = document.createElement('span');
+                badge.className = `px-1.5 py-0.5 rounded text-[9px] font-bold ${res ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`;
+                badge.textContent = `#${idx + 1} ${res ? '🎯' : '❌'}`;
+                badgeContainer.appendChild(badge);
+            });
+        }
+
+        function showCameraFallback(title, message) {
+            document.getElementById('camera-status-title').textContent = title;
+            document.getElementById('camera-status-message').textContent = message;
+            document.getElementById('camera-fallback').classList.remove('hidden');
+        }
+
+        function requestCameraAccess() {
+            const video = document.getElementById('webcam-video');
+            const fallback = document.getElementById('camera-fallback');
+
+            if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+                showCameraFallback('Kamera membutuhkan koneksi aman', 'Buka aplikasi melalui HTTPS atau localhost. Jika tidak memungkinkan, gunakan mode simulasi.');
+                isSimulationRecording = true;
+                return;
+            }
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+                .then(stream => {
+                    cameraStream = stream;
+                    isSimulationRecording = false;
+                    video.srcObject = stream;
+                    fallback.classList.add('hidden');
+                })
+                .catch(error => {
+                    isSimulationRecording = true;
+                    const message = error.name === 'NotAllowedError'
+                        ? 'Izin kamera ditolak. Izinkan kamera pada pengaturan browser lalu coba lagi.'
+                        : 'Kamera tidak tersedia. Mode simulasi tetap dapat digunakan.';
+                    showCameraFallback('Kamera belum dapat digunakan', message);
+                });
+        }
+
+        function startCameraScan() {
+            if (m1SelectedCards.length < 2 || m2SelectedCards.length < 2) {
+                alert('Susun minimal 2 kartu koding pada Misi 1 dan Misi 2 sebelum merekam!');
+                return;
+            }
+            document.getElementById('modal-camera').classList.remove('hidden');
+            document.getElementById('btn-start-rec').disabled = false;
+            document.getElementById('btn-stop-rec').disabled = true;
+            document.getElementById('recording-timer').classList.add('hidden');
+            document.getElementById('timer-sec').textContent = '00:00';
+            isSimulationRecording = false;
+            requestCameraAccess();
+        }
+
+        function stopCameraScan() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
+            clearInterval(recordingTimerInterval);
+            document.getElementById('modal-camera').classList.add('hidden');
+        }
+
+        function startRecordingVideo() {
+            recordedChunks = [];
+            recordedVideoBlob = null;
+
+            if (!isSimulationRecording && cameraStream && window.MediaRecorder) {
+                try {
+                    const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')
+                        ? 'video/webm;codecs=vp8,opus'
+                        : 'video/webm';
+                    mediaRecorder = new MediaRecorder(cameraStream, { mimeType });
+                    mediaRecorder.ondataavailable = event => { if (event.data.size > 0) recordedChunks.push(event.data); };
+                    mediaRecorder.onstop = () => {
+                        recordedVideoBlob = new Blob(recordedChunks, { type: mimeType });
+                        const preview = document.getElementById('recorded-video-player');
+                        preview.src = URL.createObjectURL(recordedVideoBlob);
+                        document.getElementById('video-preview-container').classList.remove('hidden');
+                    };
+                    mediaRecorder.start();
+                } catch (error) {
+                    isSimulationRecording = true;
+                    mediaRecorder = null;
+                }
+            } else {
+                isSimulationRecording = true;
+            }
+
+            document.getElementById('btn-start-rec').disabled = true;
+            document.getElementById('btn-stop-rec').disabled = false;
+            document.getElementById('recording-timer').classList.remove('hidden');
+
+            recSeconds = 0;
+            recordingTimerInterval = setInterval(() => {
+                recSeconds++;
+                const mins = String(Math.floor(recSeconds / 60)).padStart(2, '0');
+                const secs = String(recSeconds % 60).padStart(2, '0');
+                document.getElementById('timer-sec').textContent = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function calculateSequenceScore(selectedCards) {
+            if (selectedCards.length === 0) return 0;
+            let correctOrderMatches = 0;
+            let lastSeq = 0;
+
+            selectedCards.forEach(card => {
+                if (card.seq > lastSeq) {
+                    correctOrderMatches++;
+                    lastSeq = card.seq;
+                }
+            });
+
+            return (correctOrderMatches / 5) * 35;
+        }
+
+        function buildPersonalizedEvaluation({
+            finalScore,
+            avgSuccessRate,
+            totalCodingScore,
+            videoScore,
+            hasGoodStart,
+            hasFollowThrough,
+            m1PracticeAttempts,
+            m2PracticeAttempts,
+            m1SelectedCards,
+            m2SelectedCards,
+            recSeconds
+        }) {
+            const completedPractice = m1PracticeAttempts.length + m2PracticeAttempts.length;
+            const totalAttempts = [...m1PracticeAttempts, ...m2PracticeAttempts];
+            const successfulAttempts = totalAttempts.filter(Boolean).length;
+            const accuracy = totalAttempts.length ? successfulAttempts / totalAttempts.length : 0;
+            const m1Accuracy = m1PracticeAttempts.length
+                ? m1PracticeAttempts.filter(Boolean).length / m1PracticeAttempts.length
+                : 0;
+            const m2Accuracy = m2PracticeAttempts.length
+                ? m2PracticeAttempts.filter(Boolean).length / m2PracticeAttempts.length
+                : 0;
+            const hasCompleteSequence = m1SelectedCards.length === 5 && m2SelectedCards.length === 5 && totalCodingScore >= 35;
+            const tasks = [];
+            const feedback = [];
+
+            if (!hasGoodStart) {
+                tasks.push('Di depan pendamping, latih sikap awal: pandangan ke sasaran, kaki selebar bahu, dan badan menghadap target. Ulangi 3 set masing-masing 5 kali.');
+                feedback.push('Sikap awal dan fokus ke sasaran masih perlu diperkuat');
+            }
+
+            if (m1Accuracy < 0.6) {
+                tasks.push('Latihan lempar sasaran: lempar bola kain ke lingkaran atau keranjang dari jarak 2 meter sebanyak 3 set x 5 lemparan. Catat jumlah yang tepat sasaran.');
+                feedback.push('akurasi lempar perlu ditingkatkan');
+            }
+
+            if (m2Accuracy < 0.6) {
+                tasks.push('Latihan tendang sasaran dengan bola ringan dari jarak 2 meter sebanyak 3 set x 5 tendangan. Utamakan kaki tumpu di samping bola dan gunakan sasaran yang aman.');
+                feedback.push('kontrol tendangan perlu ditingkatkan');
+            }
+
+            if (totalCodingScore < 25 || !hasCompleteSequence) {
+                tasks.push('Susun ulang kartu gerak lempar dan tendang, lalu praktikkan perlahan dengan pola persiapan–eksekusi–gerakan lanjutan sebanyak 5 putaran.');
+                feedback.push('keruntutan tahapan gerak perlu dilatih');
+            }
+
+            if (!hasFollowThrough || videoScore < 15) {
+                tasks.push('Latihan keseimbangan: tahan posisi akhir setelah melempar atau menendang selama 3 detik, 3 set x 5 kali. Pastikan area latihan bebas benda keras.');
+                feedback.push('keseimbangan dan gerakan lanjutan perlu diperhalus');
+            }
+
+            if (completedPractice < 6) {
+                tasks.push('Lakukan pengamatan mandiri menggunakan checklist: pandangan, posisi kaki, ayunan atau dorongan, arah bola, dan keseimbangan. Minta pendamping memberi tanda pada setiap percobaan.');
+                feedback.push('data latihan masih terbatas sehingga latihan bertahap akan membantu');
+            }
+
+            if (tasks.length === 0) {
+                tasks.push('Tantangan pengayaan: buat lintasan tiga sasaran dengan jarak 2, 3, dan 4 meter. Lakukan kombinasi 5 lemparan dan 5 tendangan, lalu catat skor serta bagian gerak yang paling konsisten.');
+            }
+
+            let levelFeedback;
+            if (finalScore >= 85 && accuracy >= 0.8 && hasCompleteSequence) {
+                levelFeedback = 'Performa sangat baik dan siap diberi tantangan pengayaan';
+            } else if (finalScore >= 70) {
+                levelFeedback = 'Dasar gerak sudah berkembang dan perlu konsistensi';
+            } else {
+                levelFeedback = 'Perlu latihan dasar secara bertahap dengan pendampingan';
+            }
+
+            const detailFeedback = feedback.length ? `. Fokus utama: ${feedback.join(', ')}` : '. Pertahankan teknik dan konsistensi latihan';
+            return {
+                homeTask: `Tugas personal (${Math.round(accuracy * 100)}% keberhasilan, ${recSeconds} detik): ${tasks.slice(0, 2).join(' ')}`,
+                feedback: `${levelFeedback}${detailFeedback}`
+            };
+        }
+
+        function stopRecordingAndAnalyze() {
+            clearInterval(recordingTimerInterval);
+            stopCameraScan();
+
+            const m1CodingScore = calculateSequenceScore(m1SelectedCards);
+            const m2CodingScore = calculateSequenceScore(m2SelectedCards);
+            const totalCodingScore = (m1CodingScore + m2CodingScore) / 2;
+
+            const m1SuccessRate = m1PracticeAttempts.length > 0 ? (m1PracticeAttempts.filter(x => x).length / 5) : 0;
+            const m2SuccessRate = m2PracticeAttempts.length > 0 ? (m2PracticeAttempts.filter(x => x).length / 5) : 0;
+            const avgSuccessRate = (m1SuccessRate + m2SuccessRate) / 2;
+            const practiceScore = avgSuccessRate * 45;
+
+            let videoScore = 0;
+            if (recSeconds >= 8 && recSeconds <= 25) videoScore = 20;
+            else if (recSeconds >= 5 && recSeconds < 8) videoScore = 12;
+            else if (recSeconds > 25 && recSeconds <= 40) videoScore = 15;
+            else videoScore = 5;
+
+            const finalScore = Math.min(100, Math.round(totalCodingScore + practiceScore + videoScore));
+            const xpGained = finalScore >= 80 ? 100 : Math.round(finalScore * 0.8);
+
+            const hasGoodStart = (m1SelectedCards[0]?.seq <= 2) && (m2SelectedCards[0]?.seq <= 2);
+            const hasFollowThrough = (m1SelectedCards.some(c => c.seq === 5)) && (m2SelectedCards.some(c => c.seq === 5));
+
+            const aspects = [
+                {
+                    name: '1. Gerakan Awal',
+                    score: hasGoodStart ? 'Sangat Baik (Sikap Awal & Pandangan Terstruktur)' : 'Cukup (Perbaiki Urutan Posisi Awal)',
+                    status: hasGoodStart ? 'pass' : 'warn'
+                },
+                {
+                    name: '2. Arah Bola',
+                    score: avgSuccessRate >= 0.8 ? 'Akurat & Presisi Menuju Sasaran' : (avgSuccessRate >= 0.5 ? 'Terarah (Tingkatkan Konsistensi Tenaga)' : 'Melenceng (Perlu Kontrol Arah)'),
+                    status: avgSuccessRate >= 0.6 ? 'pass' : 'warn'
+                },
+                {
+                    name: '3. Ketepatan Gerak',
+                    score: totalCodingScore >= 25 ? 'Sesuai Urutan Logika Algoritma Koding' : 'Urutan Tahapan Gerak Belum Runtut',
+                    status: totalCodingScore >= 25 ? 'pass' : 'warn'
+                },
+                {
+                    name: '4. Gerakan Lanjutan',
+                    score: (hasFollowThrough && recSeconds >= 8) ? 'Sempurna (Follow Through Mulus & Seimbang)' : 'Kurang Mulus (Dorongan Lanjutan Perlu Ditingkatkan)',
+                    status: (hasFollowThrough && recSeconds >= 8) ? 'pass' : 'warn'
+                }
+            ];
+
+            const student = students.find(s => s.id === activeStudentId);
+            if(student) {
+                student.xp += xpGained;
+                student.m1Completed = true; student.m1Score = Math.round((m1CodingScore/35*35) + (m1SuccessRate*45) + (videoScore/2));
+                student.m2Completed = true; student.m2Score = Math.round((m2CodingScore/35*35) + (m2SuccessRate*45) + (videoScore/2));
+                student.aiAkurasi = Math.round(avgSuccessRate * 100);
+                student.aiKecepatan = videoScore === 20 ? 90 : 70;
+                student.aiKoordinasi = Math.round((totalCodingScore / 35) * 100);
+
+                const evaluation = buildPersonalizedEvaluation({
+                    finalScore,
+                    avgSuccessRate,
+                    totalCodingScore,
+                    videoScore,
+                    hasGoodStart,
+                    hasFollowThrough,
+                    m1PracticeAttempts,
+                    m2PracticeAttempts,
+                    m1SelectedCards,
+                    m2SelectedCards,
+                    recSeconds
+                });
+
+                student.homeTask = evaluation.homeTask;
+                currentHomeTaskText = evaluation.homeTask;
+
+                const studentName = student ? student.nama : 'Siswa';
+                currentAIFeedbackSpeech = `${evaluation.feedback} ${studentName}! Skor evaluasi fisikmu ${finalScore}%.`;
+                student.aiFeedback = currentAIFeedbackSpeech;
+            }
+
+            document.getElementById('result-score').textContent = finalScore + '%';
+            document.getElementById('result-xp').textContent = '+' + xpGained;
+            document.getElementById('result-ai-home-task').textContent = `"${currentHomeTaskText}"`;
+
+            const aspectsContainer = document.getElementById('aspects-breakdown-list');
+            aspectsContainer.innerHTML = '';
+            aspects.forEach(a => {
+                const item = document.createElement('div');
+                item.className = 'flex justify-between items-center bg-black/40 px-3 py-1.5 rounded-lg border border-white/5';
+                item.innerHTML = `
+                    <span class="text-gray-300 font-bold">${a.name}:</span>
+                    <span class="${a.status === 'pass' ? 'text-green-400 font-bold' : 'text-yellow-400'}">${a.score}</span>
+                `;
+                aspectsContainer.appendChild(item);
+            });
+
+            document.getElementById('modal-mission-result').classList.remove('hidden');
+            speakAIFeedback();
+            renderStudents();
+            renderRekapBelajar();
+        }
+
+        function speakAIFeedback() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); 
+                const utterance = new SpeechSynthesisUtterance(currentAIFeedbackSpeech);
+                utterance.lang = 'id-ID';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function finishMissionAndNext() {
+            window.speechSynthesis.cancel();
+            document.getElementById('modal-mission-result').classList.add('hidden');
+            navigate('rekap-belajar');
+        }
+
+        function renderRekapBelajar() {
+            const tbody = document.getElementById('rekap-table-body');
+            const emptyState = document.getElementById('empty-rekap-state');
+            const searchInput = document.getElementById('search-rekap').value.toLowerCase();
+            
+            let totalXp = 0, m1Count = 0, heroCount = 0;
+            const filtered = students.filter(s => s.nama.toLowerCase().includes(searchInput) || s.kelas.toLowerCase().includes(searchInput));
+            
+            tbody.innerHTML = '';
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                tbody.parentElement.classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                tbody.parentElement.classList.remove('hidden');
+
+                filtered.forEach((s, idx) => {
+                    totalXp += s.xp;
+                    if(s.m1Completed) m1Count++;
+                    if(s.m1Completed && s.m2Completed) heroCount++;
+                    
+                    const avgScore = Math.max(s.m1Score, s.m2Score) || 0;
+                    let kecakapan = '<span class="text-gray-500">Belum Ujian</span>';
+                    if (avgScore >= 85) kecakapan = '<span class="text-green-400 font-bold">Mahir</span>';
+                    else if (avgScore >= 70) kecakapan = '<span class="text-cyan font-bold">Cakap</span>';
+                    else if (avgScore > 0) kecakapan = '<span class="text-yellow-400 font-bold">Layak</span>';
+
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b border-white/5 hover:bg-white/5';
+                    tr.innerHTML = `
+                        <td class="py-3 px-3">${idx + 1}</td>
+                        <td class="py-3 px-3 font-bold text-white">${s.nama}</td>
+                        <td class="py-3 px-3">${s.kelas}</td>
+                        <td class="py-3 px-3 text-center">${s.m1Completed ? `<span class="text-green-400 font-bold">${s.m1Score}</span>` : '-'}</td>
+                        <td class="py-3 px-3 text-center">${s.m2Completed ? `<span class="text-green-400 font-bold">${s.m2Score}</span>` : '-'}</td>
+                        <td class="py-3 px-3 text-center">${kecakapan}</td>
+                        <td class="py-3 px-3 text-xs text-purple-300 truncate max-w-[180px]">${s.homeTask || '-'}</td>
+                        <td class="py-3 px-3 text-center">
+                            <button onclick="openRaport(${s.id})" class="px-3 py-1 bg-white/10 hover:bg-gold/20 hover:text-gold rounded-lg text-xs font-bold">Raport</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            document.getElementById('rekap-stat-total').textContent = students.length;
+            document.getElementById('rekap-stat-avg-xp').textContent = students.length > 0 ? Math.round(totalXp / students.length) + ' XP' : '0 XP';
+            document.getElementById('rekap-stat-misi1').textContent = students.length > 0 ? Math.round((m1Count / students.length) * 100) + '%' : '0%';
+            document.getElementById('rekap-stat-hero').textContent = heroCount;
+            renderCompetencyMapping();
+        }
+
+        function renderCompetencyMapping() {
+            const body = document.getElementById('competency-mapping-body');
+            const emptyState = document.getElementById('empty-competency-state');
+            body.innerHTML = '';
+
+            if (students.length === 0) {
+                emptyState.classList.remove('hidden');
+                body.parentElement.classList.add('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            body.parentElement.classList.remove('hidden');
+
+            students.forEach((s) => {
+                const avgScore = Math.max(s.m1Score, s.m2Score) || 0;
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-white/5 hover:bg-white/5';
+                tr.innerHTML = `
+                    <td class="py-3 px-3 font-bold text-white">${s.nama} (${s.kelas})</td>
+                    <td class="py-3 px-3 text-cyan font-bold">${avgScore}%</td>
+                    <td class="py-3 px-3 text-purple-300 font-bold">${s.m1Completed ? Math.min(100, avgScore + 5) : 30}%</td>
+                    <td class="py-3 px-3 text-green-400 font-bold">${s.xp > 0 ? Math.min(100, 70 + (s.xp/2)) : 40}%</td>
+                    <td class="py-3 px-3 text-gold font-bold">${s.xp >= 80 ? 95 : 60}%</td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        function openRaport(studentId) {
+            const student = students.find(s => s.id === studentId);
+            if(!student) return;
+
+            document.getElementById('raport-student-info').innerHTML = `
+                <div><div class="text-xs text-gray-400">Nama Siswa</div><div class="font-bold text-white">${student.nama}</div></div>
+                <div><div class="text-xs text-gray-400">Kelas</div><div class="font-bold text-white">${student.kelas}</div></div>
+                <div><div class="text-xs text-gray-400">Total XP</div><div class="font-bold text-gold">${student.xp} XP</div></div>
+                <div><div class="text-xs text-gray-400">Predikat</div><div class="font-bold text-cyan">${student.xp >= 80 ? 'Hero' : 'Rookie'}</div></div>
+            `;
+
+            document.getElementById('raport-missions-status').innerHTML = `
+                <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex justify-between">
+                    <span>Misi 1: Damar Kurung</span>
+                    <span class="font-bold text-green-400">${student.m1Completed ? student.m1Score : 'Belum'}</span>
+                </div>
+                <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex justify-between">
+                    <span>Misi 2: Pencak Macan</span>
+                    <span class="font-bold text-blue-400">${student.m2Completed ? student.m2Score : 'Belum'}</span>
+                </div>
+            `;
+
+            document.getElementById('raport-curriculum-competencies').innerHTML = `
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-cyan">1. Keterampilan Gerak:</strong> ${student.m1Score}%</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-purple-300">2. Pengetahuan Gerak:</strong> Algoritma Terstruktur</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-green-400">3. Pemanfaatan Gerak:</strong> Aktif Latihan Nyata</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-gold">4. Karakter & Nilai:</strong> Mandiri & Percaya Diri</div>
+            `;
+
+            document.getElementById('raport-home-task-text').textContent = student.homeTask || 'Belum ada tugas rumah.';
+            document.getElementById('modal-raport').classList.remove('hidden');
+        }
+
+        function closeRaportModal() {
+            document.getElementById('modal-raport').classList.add('hidden');
+        }
+
+        function downloadRaportPDF() { window.print(); }
+
+        function exportStudentsDataCSV() {
+            if (students.length === 0) return alert('Belum ada data siswa!');
+            let csv = "data:text/csv;charset=utf-8,No,Nama,Kelas,Misi 1,Misi 2,XP,Saran AI\n";
+            students.forEach((s, idx) => {
+                csv += `${idx + 1},"${s.nama}","${s.kelas}",${s.m1Score},${s.m2Score},${s.xp},"${s.homeTask || '-'}"\n`;
+            });
+            const link = document.createElement("a");
+            link.href = encodeURI(csv);
+            link.download = `Data_PJOK_SmartMove_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
+        }
+    </script>
+</body>
+</html>
