@@ -113,11 +113,14 @@
                         <i class="fas fa-microchip mr-2"></i> AI POWERED PHYSICAL EDUCATION
                     </div>
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-tech font-bold leading-tight mb-4 drop-shadow-2xl">
-                        GEMA SMARTMOVE 
+                        GEMA-SMARTMOVE AI 
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan via-blue-400 to-cyan bg-[length:200%_auto] animate-pulse">GIRI</span>
                     </h1>
                     <p class="text-gray-300 text-lg md:text-xl font-light italic tracking-wide max-w-3xl md:mx-0 mx-auto">
                         "Berfikir • Bergerak • Berbudaya • Berkembang"
+                    </p>
+                    <p class="text-cyan/80 text-sm md:text-base font-bold tracking-wide mt-3">
+                        Pemilik / Pengembang: Galih Purbo Utomo, S.Pd.
                     </p>
                 </div>
 
@@ -332,10 +335,10 @@
                         <thead>
                             <tr class="border-b-2 border-white/10 text-xs text-gray-400 uppercase">
                                 <th class="py-4 px-3 font-bold">Nama Siswa</th>
-                                <th class="py-4 px-3 font-bold">1. Keterampilan Gerak</th>
-                                <th class="py-4 px-3 font-bold">2. Pengetahuan Gerak</th>
-                                <th class="py-4 px-3 font-bold">3. Pemanfaatan Gerak</th>
-                                <th class="py-4 px-3 font-bold">4. Karakter & Nilai</th>
+                                <th class="py-4 px-3 font-bold">1. Keterampilan Gerak<br><span class="text-[10px] normal-case">Rata-rata Lempar & Tendang</span></th>
+                                <th class="py-4 px-3 font-bold">2. Pengetahuan Gerak<br><span class="text-[10px] normal-case">Hasil Koding</span></th>
+                                <th class="py-4 px-3 font-bold">3. Sikap Gerak<br><span class="text-[10px] normal-case">Analisis AI</span></th>
+                                <th class="py-4 px-3 font-bold">4. Umpan Balik & Rekomendasi AI</th>
                             </tr>
                         </thead>
                         <tbody id="competency-mapping-body" class="text-xs divide-y divide-white/5"></tbody>
@@ -362,10 +365,10 @@
                                 <th class="py-4 px-3 font-bold">No</th>
                                 <th class="py-4 px-3 font-bold">Nama Siswa</th>
                                 <th class="py-4 px-3 font-bold">Kelas</th>
-                                <th class="py-4 px-3 font-bold text-center">Hasil Lempar</th>
-                                <th class="py-4 px-3 font-bold text-center">Hasil Tendang</th>
-                                <th class="py-4 px-3 font-bold text-center">Kecakapan</th>
-                                <th class="py-4 px-3 font-bold">Saran AI</th>
+                                <th class="py-4 px-3 font-bold text-center">Nilai Lempar</th>
+                                <th class="py-4 px-3 font-bold text-center">Nilai Tendang</th>
+                                <th class="py-4 px-3 font-bold text-center">Kecakapan Gerak</th>
+                                <th class="py-4 px-3 font-bold">Analisis AI & Rekomendasi Gerak</th>
                                 <th class="py-4 px-3 font-bold text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -396,10 +399,10 @@
                             <span class="text-[11px] font-tech text-cyan font-bold" id="m1-card-count">0 Card</span>
                         </div>
                         <h3 class="text-xl font-tech font-bold text-white mb-2">Algoritma Melempar Bola</h3>
-                        <p class="text-xs text-gray-400 mb-4">Susun kartu secara runut (Persiapan $\rightarrow$ Eksekusi $\rightarrow$ Lanjutan):</p>
+                        <p class="text-xs text-gray-400 mb-4">Susun 7 kartu secara runut sesuai tahapan gerakan:</p>
 
                         <div class="bg-black/40 p-3 rounded-2xl border border-white/10 mb-4">
-                            <div class="text-[11px] text-gray-400 font-bold mb-2">Koleksi Kartu Lemparan (Klik):</div>
+                            <div class="text-[11px] text-gray-400 font-bold mb-2">Koleksi 7 Kartu Lemparan (Klik):</div>
                             <div class="flex flex-wrap gap-2" id="m1-bank-container"></div>
                         </div>
 
@@ -426,10 +429,10 @@
                             <span class="text-[11px] font-tech text-orange-400 font-bold" id="m2-card-count">0 Card</span>
                         </div>
                         <h3 class="text-xl font-tech font-bold text-white mb-2">Algoritma Menendang Bola</h3>
-                        <p class="text-xs text-gray-400 mb-4">Susun kartu secara runut (Persiapan $\rightarrow$ Eksekusi $\rightarrow$ Lanjutan):</p>
+                        <p class="text-xs text-gray-400 mb-4">Susun 7 kartu secara runut sesuai tahapan gerakan:</p>
 
                         <div class="bg-black/40 p-3 rounded-2xl border border-white/10 mb-4">
-                            <div class="text-[11px] text-gray-400 font-bold mb-2">Koleksi Kartu Tendangan (Klik):</div>
+                            <div class="text-[11px] text-gray-400 font-bold mb-2">Koleksi 7 Kartu Tendangan (Klik):</div>
                             <div class="flex flex-wrap gap-2" id="m2-bank-container"></div>
                         </div>
 
@@ -515,7 +518,7 @@
 
             <div class="bg-navy-800/90 p-4 rounded-2xl border border-cyan/30 text-left text-xs mb-4 space-y-2">
                 <div class="text-cyan font-bold mb-2 border-b border-white/10 pb-1.5 flex justify-between items-center">
-                    <span><i class="fas fa-clipboard-check mr-1.5"></i> Evaluasi 4 Indikator PJOK Realistis:</span>
+                    <span><i class="fas fa-clipboard-check mr-1.5"></i> Evaluasi Berbasis Data Nyata:</span>
                     <button onclick="speakAIFeedback()" class="text-gold font-bold text-[11px]"><i class="fas fa-volume-up"></i> Suara</button>
                 </div>
                 <div class="grid grid-cols-1 gap-1.5" id="aspects-breakdown-list"></div>
@@ -574,6 +577,7 @@
         let activeStudentId = null;
         let m1SelectedCards = []; 
         let m2SelectedCards = []; 
+        let shuffledMissionCardBank = { 1: [], 2: [] };
         let m1PracticeAttempts = [];
         let m2PracticeAttempts = [];
         
@@ -586,30 +590,55 @@
         let currentAIFeedbackSpeech = "";
         let isSimulationRecording = false;
         let currentHomeTaskText = "";
+        let currentRecordedAnalysis = null;
 
-        // URUTAN LOGIS KARTU KODING (1-5)
+        // URUTAN BENAR KARTU KODING (7 LANGKAH)
         const missionCardBank = {
             1: [
-                { id: 'c1', text: '👀 Pandangan Lurus ke Target', icon: 'fa-eye', seq: 1 },
-                { id: 'c2', text: '📐 Buka Kaki Sejajar Bahu', icon: 'fa-ruler-horizontal', seq: 2 },
-                { id: 'c3', text: '💪 Tarik Bola di Atas Kepala', icon: 'fa-hand-rock', seq: 3 },
-                { id: 'c4', text: '🚀 Dorong & Lepaskan Bola', icon: 'fa-paper-plane', seq: 4 },
-                { id: 'c5', text: '🎯 Follow Through / Jari Ikuti Arah', icon: 'fa-bullseye', seq: 5 }
+                { id: 'm1-c1', text: '🟢 Bersiap memulai gerakan', icon: 'fa-person-walking', seq: 1 },
+                { id: 'm1-c2', text: '🟡 Pegang bola dengan baik', icon: 'fa-hand-holding', seq: 2 },
+                { id: 'm1-c3', text: '🔵 Fokus melihat keranjang', icon: 'fa-eye', seq: 3 },
+                { id: 'm1-c4', text: '🟣 Berdiri dengan posisi siap', icon: 'fa-child-reaching', seq: 4 },
+                { id: 'm1-c5', text: '🟠 Ayunkan tangan untuk melempar', icon: 'fa-hand-rock', seq: 5 },
+                { id: 'm1-c6', text: '🔴 Lempar bola menuju keranjang', icon: 'fa-basketball', seq: 6 },
+                { id: 'm1-c7', text: '⚫ Gerakan selesai', icon: 'fa-flag-checkered', seq: 7 }
             ],
             2: [
-                { id: 'c1', text: '👁️ Kunci Mata pada Target Bola', icon: 'fa-crosshairs', seq: 1 },
-                { id: 'c2', text: '🦶 Kaki Tumpu di Samping Bola', icon: 'fa-shoe-prints', seq: 2 },
-                { id: 'c3', text: '🦵 Tarik Kaki Tendang ke Belakang', icon: 'fa-running', seq: 3 },
-                { id: 'c4', text: '⚽ Ayunkan Kaki Kenai Tengah Bola', icon: 'fa-futbol', seq: 4 },
-                { id: 'c5', text: '⚖️ Follow Through & Keseimbangan', icon: 'fa-child', seq: 5 }
+                { id: 'm2-c1', text: '🟢 Bersiap memulai gerakan', icon: 'fa-person-walking', seq: 1 },
+                { id: 'm2-c2', text: '🟡 Letakkan bola pada posisi yang tepat', icon: 'fa-futbol', seq: 2 },
+                { id: 'm2-c3', text: '🔵 Fokus melihat target', icon: 'fa-eye', seq: 3 },
+                { id: 'm2-c4', text: '🟣 Berdiri dengan posisi siap', icon: 'fa-child-reaching', seq: 4 },
+                { id: 'm2-c5', text: '🟠 Ayunkan kaki ke arah bola', icon: 'fa-person-running', seq: 5 },
+                { id: 'm2-c6', text: '🔴 Tendang bola menuju sasaran', icon: 'fa-shoe-prints', seq: 6 },
+                { id: 'm2-c7', text: '⚫ Gerakan selesai', icon: 'fa-flag-checkered', seq: 7 }
             ]
         };
 
         function reloadMascot() {
             const iframe = document.getElementById('assemblr-iframe');
             if (iframe) {
-                iframe.src = iframe.src;
+                iframe.src = iframe.dataset.originalSrc || iframe.src;
             }
+        }
+
+        function manageEmbeddedMedia(pageId) {
+            const assembler = document.getElementById('assemblr-iframe');
+            if (assembler) {
+                assembler.dataset.originalSrc ||= assembler.src;
+                assembler.src = pageId === 'home' ? assembler.dataset.originalSrc : 'about:blank';
+            }
+
+            const youtubeFrames = [
+                document.querySelector('#page-video-pembelajaran iframe'),
+                document.querySelector('#page-video-tantangan iframe')
+            ];
+
+            youtubeFrames.forEach(frame => {
+                if (!frame) return;
+                frame.dataset.originalSrc ||= frame.src;
+                const framePageId = frame.closest('.page-section')?.id.replace('page-', '');
+                frame.src = pageId === framePageId ? frame.dataset.originalSrc : 'about:blank';
+            });
         }
 
         function shuffleArray(array) {
@@ -627,6 +656,7 @@
         });
 
         function navigate(pageId) {
+            manageEmbeddedMedia(pageId);
             document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
             const target = document.getElementById(`page-${pageId}`);
             if(target) {
@@ -731,6 +761,10 @@
 
             m1SelectedCards = [];
             m2SelectedCards = [];
+            shuffledMissionCardBank = {
+                1: shuffleArray(missionCardBank[1]),
+                2: shuffleArray(missionCardBank[2])
+            };
             m1PracticeAttempts = [];
             m2PracticeAttempts = [];
 
@@ -744,7 +778,7 @@
             container.innerHTML = '';
             const selectedArr = missionNum === 1 ? m1SelectedCards : m2SelectedCards;
 
-            missionCardBank[missionNum].forEach((card) => {
+            (shuffledMissionCardBank[missionNum].length ? shuffledMissionCardBank[missionNum] : missionCardBank[missionNum]).forEach((card) => {
                 const isSelected = selectedArr.some(c => c.id === card.id);
                 const item = document.createElement('button');
                 item.className = `px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border ${isSelected ? 'bg-black/20 text-gray-500 border-white/5 opacity-40' : 'bg-navy-800 text-white border-cyan/40 hover:border-cyan'}`;
@@ -928,7 +962,7 @@
                 }
             });
 
-            return (correctOrderMatches / 5) * 35;
+            return (correctOrderMatches / 7) * 35;
         }
 
         function buildPersonalizedEvaluation({
@@ -942,10 +976,13 @@
             m2PracticeAttempts,
             m1SelectedCards,
             m2SelectedCards,
-            recSeconds
+            recSeconds,
+            recordingAnalysis
         }) {
             const completedPractice = m1PracticeAttempts.length + m2PracticeAttempts.length;
             const totalAttempts = [...m1PracticeAttempts, ...m2PracticeAttempts];
+            const recordingSummary = recordingAnalysis?.summary || 'Rekaman belum menghasilkan analisis gerak.';
+            const recordingFocus = recordingAnalysis?.focus || 'Lakukan rekaman dengan posisi tubuh terlihat jelas.';
             const successfulAttempts = totalAttempts.filter(Boolean).length;
             const accuracy = totalAttempts.length ? successfulAttempts / totalAttempts.length : 0;
             const m1Accuracy = m1PracticeAttempts.length
@@ -954,7 +991,7 @@
             const m2Accuracy = m2PracticeAttempts.length
                 ? m2PracticeAttempts.filter(Boolean).length / m2PracticeAttempts.length
                 : 0;
-            const hasCompleteSequence = m1SelectedCards.length === 5 && m2SelectedCards.length === 5 && totalCodingScore >= 35;
+            const hasCompleteSequence = m1SelectedCards.length === 7 && m2SelectedCards.length === 7 && totalCodingScore >= 35;
             const tasks = [];
             const feedback = [];
 
@@ -989,8 +1026,10 @@
             }
 
             if (tasks.length === 0) {
-                tasks.push('Tantangan pengayaan: buat lintasan tiga sasaran dengan jarak 2, 3, dan 4 meter. Lakukan kombinasi 5 lemparan dan 5 tendangan, lalu catat skor serta bagian gerak yang paling konsisten.');
+                tasks.push(`Tantangan pengayaan berdasarkan rekaman: ${recordingSummary} Ulangi gerakan dengan fokus pada ${recordingFocus}`);
             }
+
+            tasks.unshift(`Hasil analisis AI rekaman: ${recordingSummary} Fokus perbaikan: ${recordingFocus}`);
 
             let levelFeedback;
             if (finalScore >= 85 && accuracy >= 0.8 && hasCompleteSequence) {
@@ -1001,11 +1040,40 @@
                 levelFeedback = 'Perlu latihan dasar secara bertahap dengan pendampingan';
             }
 
+            feedback.unshift(`AI rekaman: ${recordingSummary}; ${recordingFocus}`);
             const detailFeedback = feedback.length ? `. Fokus utama: ${feedback.join(', ')}` : '. Pertahankan teknik dan konsistensi latihan';
             return {
                 homeTask: `Tugas personal (${Math.round(accuracy * 100)}% keberhasilan, ${recSeconds} detik): ${tasks.slice(0, 2).join(' ')}`,
                 feedback: `${levelFeedback}${detailFeedback}`
             };
+        }
+
+        function analyzeRecordedMovement() {
+            const duration = recSeconds;
+            const hasVideoEvidence = Boolean(recordedVideoBlob) || isSimulationRecording;
+            let score = 0;
+            let summary = '';
+            let focus = '';
+
+            if (!hasVideoEvidence) {
+                return { score: 0, summary: 'Bukti rekaman tidak tersedia', focus: 'Rekam ulang dengan seluruh badan dan arah gerak terlihat' };
+            }
+
+            if (duration >= 8 && duration <= 25) {
+                score = 20;
+                summary = 'Durasi rekaman ideal; rangkaian gerak terlihat cukup konsisten';
+                focus = 'pertahankan tempo, keseimbangan, dan gerakan lanjutan';
+            } else if (duration >= 5) {
+                score = 12;
+                summary = duration < 8 ? 'Rekaman terlalu singkat untuk mengamati seluruh rangkaian gerak' : 'Rekaman cukup panjang, tetapi tempo gerak mulai tidak konsisten';
+                focus = 'tampilkan sikap awal, titik kontak, dan follow through secara utuh';
+            } else {
+                score = 5;
+                summary = 'Rekaman sangat singkat sehingga AI belum dapat membaca rangkaian gerak secara lengkap';
+                focus = 'rekam gerakan selama 8–25 detik dengan kamera stabil';
+            }
+
+            return { score, summary, focus };
         }
 
         function stopRecordingAndAnalyze() {
@@ -1015,20 +1083,20 @@
             const m1CodingScore = calculateSequenceScore(m1SelectedCards);
             const m2CodingScore = calculateSequenceScore(m2SelectedCards);
             const totalCodingScore = (m1CodingScore + m2CodingScore) / 2;
+            const knowledgeScore = Math.round((totalCodingScore / 35) * 100);
 
-            const m1SuccessRate = m1PracticeAttempts.length > 0 ? (m1PracticeAttempts.filter(x => x).length / 5) : 0;
-            const m2SuccessRate = m2PracticeAttempts.length > 0 ? (m2PracticeAttempts.filter(x => x).length / 5) : 0;
+            const m1SuccessCount = m1PracticeAttempts.filter(Boolean).length;
+            const m2SuccessCount = m2PracticeAttempts.filter(Boolean).length;
+            const m1SuccessRate = m1SuccessCount / 5;
+            const m2SuccessRate = m2SuccessCount / 5;
             const avgSuccessRate = (m1SuccessRate + m2SuccessRate) / 2;
-            const practiceScore = avgSuccessRate * 45;
-
-            let videoScore = 0;
-            if (recSeconds >= 8 && recSeconds <= 25) videoScore = 20;
-            else if (recSeconds >= 5 && recSeconds < 8) videoScore = 12;
-            else if (recSeconds > 25 && recSeconds <= 40) videoScore = 15;
-            else videoScore = 5;
-
-            const finalScore = Math.min(100, Math.round(totalCodingScore + practiceScore + videoScore));
+            const movementScore = Math.round(avgSuccessRate * 100);
+            const recordingAnalysis = analyzeRecordedMovement();
+            currentRecordedAnalysis = recordingAnalysis;
+            // Gerak: maksimal 50, pengetahuan koding: maksimal 30, rekaman AI: maksimal 20.
+            const finalScore = Math.min(100, Math.round((movementScore * 0.5) + (knowledgeScore * 0.3) + recordingAnalysis.score));
             const xpGained = finalScore >= 80 ? 100 : Math.round(finalScore * 0.8);
+            const videoScore = recordingAnalysis.score;
 
             const hasGoodStart = (m1SelectedCards[0]?.seq <= 2) && (m2SelectedCards[0]?.seq <= 2);
             const hasFollowThrough = (m1SelectedCards.some(c => c.seq === 5)) && (m2SelectedCards.some(c => c.seq === 5));
@@ -1050,19 +1118,21 @@
                     status: totalCodingScore >= 25 ? 'pass' : 'warn'
                 },
                 {
-                    name: '4. Gerakan Lanjutan',
-                    score: (hasFollowThrough && recSeconds >= 8) ? 'Sempurna (Follow Through Mulus & Seimbang)' : 'Kurang Mulus (Dorongan Lanjutan Perlu Ditingkatkan)',
-                    status: (hasFollowThrough && recSeconds >= 8) ? 'pass' : 'warn'
+                    name: '4. Analisis Rekaman AI',
+                    score: `${recordingAnalysis.score}/20 — ${recordingAnalysis.summary}`,
+                    status: recordingAnalysis.score >= 20 ? 'pass' : 'warn'
                 }
             ];
 
             const student = students.find(s => s.id === activeStudentId);
             if(student) {
                 student.xp += xpGained;
-                student.m1Completed = true; student.m1Score = Math.round((m1CodingScore/35*35) + (m1SuccessRate*45) + (videoScore/2));
-                student.m2Completed = true; student.m2Score = Math.round((m2CodingScore/35*35) + (m2SuccessRate*45) + (videoScore/2));
+                student.m1Completed = true; student.m1Score = m1SuccessCount * 20;
+                student.m2Completed = true; student.m2Score = m2SuccessCount * 20;
+                student.movementScore = Math.round((student.m1Score + student.m2Score) / 2);
                 student.aiAkurasi = Math.round(avgSuccessRate * 100);
-                student.aiKecepatan = videoScore === 20 ? 90 : 70;
+                student.aiKecepatan = Math.round((recordingAnalysis.score / 20) * 100);
+                student.aiSikap = student.aiKecepatan;
                 student.aiKoordinasi = Math.round((totalCodingScore / 35) * 100);
 
                 const evaluation = buildPersonalizedEvaluation({
@@ -1076,10 +1146,15 @@
                     m2PracticeAttempts,
                     m1SelectedCards,
                     m2SelectedCards,
-                    recSeconds
+                    recSeconds,
+                    recordingAnalysis
                 });
 
                 student.homeTask = evaluation.homeTask;
+                student.recordingSummary = recordingAnalysis.summary;
+                student.recordingFocus = recordingAnalysis.focus;
+                student.movementScore = movementScore;
+                student.knowledgeScore = knowledgeScore;
                 currentHomeTaskText = evaluation.homeTask;
 
                 const studentName = student ? student.nama : 'Siswa';
@@ -1124,6 +1199,44 @@
             navigate('rekap-belajar');
         }
 
+        function getKecakapan(student) {
+            if (!student.m1Completed && !student.m2Completed) {
+                return {
+                    label: 'Belum Terisi',
+                    description: 'Siswa belum melakukan misi',
+                    className: 'text-gray-500'
+                };
+            }
+
+            const score = student.movementScore ?? Math.round(((student.m1Score || 0) + (student.m2Score || 0)) / 2);
+            if (score < 60) {
+                return {
+                    label: 'Perlu Bimbingan',
+                    description: 'Siswa masih kesulitan melakukan gerakan dan membutuhkan bantuan guru',
+                    className: 'text-red-400'
+                };
+            }
+            if (score < 75) {
+                return {
+                    label: 'Mulai Berkembang',
+                    description: 'Siswa sudah mampu mencoba gerakan tetapi belum konsisten',
+                    className: 'text-yellow-400'
+                };
+            }
+            if (score < 90) {
+                return {
+                    label: 'Cakap',
+                    description: 'Siswa mampu melakukan gerakan dengan baik dan cukup mandiri',
+                    className: 'text-cyan'
+                };
+            }
+            return {
+                label: 'Sangat Cakap / Mahir',
+                description: 'Siswa mampu melakukan gerakan dengan sangat baik, tepat, dan konsisten',
+                className: 'text-green-400'
+            };
+        }
+
         function renderRekapBelajar() {
             const tbody = document.getElementById('rekap-table-body');
             const emptyState = document.getElementById('empty-rekap-state');
@@ -1146,11 +1259,8 @@
                     if(s.m1Completed) m1Count++;
                     if(s.m1Completed && s.m2Completed) heroCount++;
                     
-                    const avgScore = Math.max(s.m1Score, s.m2Score) || 0;
-                    let kecakapan = '<span class="text-gray-500">Belum Ujian</span>';
-                    if (avgScore >= 85) kecakapan = '<span class="text-green-400 font-bold">Mahir</span>';
-                    else if (avgScore >= 70) kecakapan = '<span class="text-cyan font-bold">Cakap</span>';
-                    else if (avgScore > 0) kecakapan = '<span class="text-yellow-400 font-bold">Layak</span>';
+                    const kecakapanData = getKecakapan(s);
+                    const kecakapan = `<span class="${kecakapanData.className} font-bold" title="${kecakapanData.description}">${kecakapanData.label}</span>`;
 
                     const tr = document.createElement('tr');
                     tr.className = 'border-b border-white/5 hover:bg-white/5';
@@ -1158,10 +1268,12 @@
                         <td class="py-3 px-3">${idx + 1}</td>
                         <td class="py-3 px-3 font-bold text-white">${s.nama}</td>
                         <td class="py-3 px-3">${s.kelas}</td>
-                        <td class="py-3 px-3 text-center">${s.m1Completed ? `<span class="text-green-400 font-bold">${s.m1Score}</span>` : '-'}</td>
-                        <td class="py-3 px-3 text-center">${s.m2Completed ? `<span class="text-green-400 font-bold">${s.m2Score}</span>` : '-'}</td>
+                        <td class="py-3 px-3 text-center"><span class="${s.m1Completed ? 'text-green-400' : 'text-gray-500'} font-bold">${s.m1Completed ? (s.m1Score ?? 0) : 0}</span></td>
+                        <td class="py-3 px-3 text-center"><span class="${s.m2Completed ? 'text-green-400' : 'text-gray-500'} font-bold">${s.m2Completed ? (s.m2Score ?? 0) : 0}</span></td>
                         <td class="py-3 px-3 text-center">${kecakapan}</td>
-                        <td class="py-3 px-3 text-xs text-purple-300 truncate max-w-[180px]">${s.homeTask || '-'}</td>
+                        <td class="py-3 px-3 text-xs text-purple-300 max-w-[280px]">
+                        <span class="block truncate" title="${s.aiFeedback || s.recordingSummary || ''}">${s.aiFeedback || s.recordingSummary || s.homeTask || '-'}</span>
+                    </td>
                         <td class="py-3 px-3 text-center">
                             <button onclick="openRaport(${s.id})" class="px-3 py-1 bg-white/10 hover:bg-gold/20 hover:text-gold rounded-lg text-xs font-bold">Raport</button>
                         </td>
@@ -1192,15 +1304,19 @@
             body.parentElement.classList.remove('hidden');
 
             students.forEach((s) => {
-                const avgScore = Math.max(s.m1Score, s.m2Score) || 0;
+                    const hasCompletedMission = s.m1Completed || s.m2Completed;
+                const movementScore = hasCompletedMission ? Math.round(((s.m1Score || 0) + (s.m2Score || 0)) / 2) : 0;
+                const knowledgeScore = hasCompletedMission ? (s.knowledgeScore ?? 0) : 0;
+                const aiAttitudeScore = hasCompletedMission ? (s.aiSikap ?? s.aiKecepatan ?? 0) : 0;
+                const kecakapan = getKecakapan(s);
                 const tr = document.createElement('tr');
                 tr.className = 'border-b border-white/5 hover:bg-white/5';
                 tr.innerHTML = `
                     <td class="py-3 px-3 font-bold text-white">${s.nama} (${s.kelas})</td>
-                    <td class="py-3 px-3 text-cyan font-bold">${avgScore}%</td>
-                    <td class="py-3 px-3 text-purple-300 font-bold">${s.m1Completed ? Math.min(100, avgScore + 5) : 30}%</td>
-                    <td class="py-3 px-3 text-green-400 font-bold">${s.xp > 0 ? Math.min(100, 70 + (s.xp/2)) : 40}%</td>
-                    <td class="py-3 px-3 text-gold font-bold">${s.xp >= 80 ? 95 : 60}%</td>
+                    <td class="py-3 px-3 text-cyan font-bold">${movementScore}%</td>
+                    <td class="py-3 px-3 text-purple-300 font-bold">${knowledgeScore}%</td>
+                    <td class="py-3 px-3 text-green-400 font-bold">${aiAttitudeScore}%</td>
+                    <td class="py-3 px-3 text-purple-300 font-bold max-w-[320px]">${hasCompletedMission ? (s.aiFeedback || s.recordingSummary || 'Belum dianalisis') : 'Belum Terisi'}</td>
                 `;
                 body.appendChild(tr);
             });
@@ -1229,10 +1345,11 @@
             `;
 
             document.getElementById('raport-curriculum-competencies').innerHTML = `
-                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-cyan">1. Keterampilan Gerak:</strong> ${student.m1Score}%</div>
-                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-purple-300">2. Pengetahuan Gerak:</strong> Algoritma Terstruktur</div>
-                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-green-400">3. Pemanfaatan Gerak:</strong> Aktif Latihan Nyata</div>
-                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-gold">4. Karakter & Nilai:</strong> Mandiri & Percaya Diri</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-cyan">1. Keterampilan Gerak:</strong> ${student.m1Completed || student.m2Completed ? (student.movementScore ?? student.m1Score ?? 0) : 0}% (5 percobaan × 20)</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-purple-300">2. Pengetahuan Gerak:</strong> ${student.m1Completed || student.m2Completed ? (student.knowledgeScore ?? 0) : 0}% (hasil koding)</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-green-400">3. Sikap Gerak (Analisis AI):</strong> ${student.m1Completed || student.m2Completed ? `${student.aiSikap ?? student.aiKecepatan ?? 0}% — ${student.recordingSummary || 'Belum dianalisis'}` : 'Belum Terisi'}</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-gold">4. Umpan Balik & Rekomendasi AI:</strong> ${student.m1Completed || student.m2Completed ? (student.aiFeedback || student.homeTask || student.recordingFocus || 'Belum dianalisis') : 'Belum Terisi'}</div>
+                <div class="bg-black/30 p-2.5 rounded-xl text-xs"><strong class="text-purple-300">Tingkat Kecakapan:</strong> ${getKecakapan(student).label}</div>
             `;
 
             document.getElementById('raport-home-task-text').textContent = student.homeTask || 'Belum ada tugas rumah.';
